@@ -85,7 +85,7 @@ La API fue desarrollada bajo principios REST, utilizando el ID como parámetro e
 
 📝 Documentación completa:  
 
-[Ver tabla de endpoints completa aquí](-docs/endpoints.md)
+[Ver tabla de endpoints completa aquí](docs/endpoints.md)
 
 ##  Documentación OpenAPI (Swagger)
 
