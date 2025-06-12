@@ -81,9 +81,9 @@ El presente documento describe el desarrollo de una API RESTful implementada en 
 
 La API fue desarrollada bajo principios REST, utilizando el ID como parámetro en la URL para identificar recursos.
 
-✅ Todos los endpoints devuelven `Content-Type: application/json`.
+ Todos los endpoints devuelven `Content-Type: application/json`.
 
-📝 Documentación completa:  
+ Documentación completa:  
 
 [Ver tabla de endpoints completa aquí](docs/endpoints.md)
 
@@ -91,7 +91,7 @@ La API fue desarrollada bajo principios REST, utilizando el ID como parámetro e
 
 La documentación completa de los endpoints, parámetros, request/response y códigos de estado fue generada utilizando el estándar OpenAPI 3.0 y se encuentra disponible en el siguiente archivo:
 
-📄 [`swagger.yaml`](swagger.yaml)
+ [`swagger.yaml`](swagger.yaml)
 
 Se puede visualizar utilizando herramientas como [Swagger Editor](https://editor.swagger.io/) o Swagger UI.
 
@@ -101,7 +101,7 @@ Opcionalmente, puede ser convertido a HTML o documentado con Swagger Viewer en V
 
 ---
 
-## 🧩 5. Lógica de Negocio -- `precio_final`
+##  5. Lógica de Negocio -- `precio_final`
 
 El endpoint:
 
