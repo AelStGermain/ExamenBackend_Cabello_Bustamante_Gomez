@@ -146,22 +146,7 @@ Respuestas ante errores comunes (400, 404, etc.)
 
 Archivo adjunto: [´thunder-collection_ExamenTodocamisetas.json´](thunder-collection_ExamenTodocamisetas.json)
 
-## 7. Entrega Final
 
-Todos los archivos fueron empaquetados y entregados en un archivo .zip con el siguiente contenido:
+## 7. Conclusión
 
-/todoCamisetas-api (código completo)
-
-informe.md (este documento)
-
-coleccion_thunderclient.json
-
-diagrama_ER.png
-
-Nombre del archivo:
-
-Eval_U3A_Cabello_Bustamante_Gomez.zip
-
-## 8. Conclusión
-
-El proyecto cumple con todos los requisitos técnicos de la evaluación, entregando una API modular, funcional y con lógica de negocio optimizada. Se respetaron los principios REST, se utilizaron buenas prácticas de validación y se realizó documentación completa para facilitar el consumo desde frontend o herramientas de prueba.
+El proyecto cumple con todos los requisitos técnicos de la evaluación, entregando una API modular, funcional y con lógica de negocio optimizada. Se respetaron los principios REST, se utilizaron buenas prácticas de validación, y se documentó completamente para facilitar su uso desde frontend o herramientas externas como Thunder Client o Swagger UI.
