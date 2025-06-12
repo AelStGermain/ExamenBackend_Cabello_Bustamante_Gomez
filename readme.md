@@ -131,7 +131,7 @@ Implementa la lógica:
 
 }
 
-🧪 6. Pruebas y Colección Thunder Client
+ 6. Pruebas y Colección Thunder Client
 
 Se realizaron pruebas de:
 
@@ -143,9 +143,9 @@ Lógica de precio_final validada con distintos tipos de clientes.
 
 Respuestas ante errores comunes (400, 404, etc.)
 
-📦 Archivo adjunto: coleccion_thunderclient.json
+ Archivo adjunto: thunder-collection_ExamenTodocamisetas.json
 
-📦 7. Entrega Final
+ 7. Entrega Final
 
 Todos los archivos fueron empaquetados y entregados en un archivo .zip con el siguiente contenido:
 
@@ -157,10 +157,10 @@ coleccion_thunderclient.json
 
 diagrama_ER.png
 
-📁 Nombre del archivo:
+Nombre del archivo:
 
 Eval_U3A_Cabello_Bustamante_Gomez.zip
 
-✔️ 8. Conclusión
+ 8. Conclusión
 
 El proyecto cumple con todos los requisitos técnicos de la evaluación, entregando una API modular, funcional y con lógica de negocio optimizada. Se respetaron los principios REST, se utilizaron buenas prácticas de validación y se realizó documentación completa para facilitar el consumo desde frontend o herramientas de prueba.
