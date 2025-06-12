@@ -144,7 +144,7 @@ Lógica de precio_final validada con distintos tipos de clientes.
 
 Respuestas ante errores comunes (400, 404, etc.)
 
-Archivo adjunto: (thunder-collection_ExamenTodocamisetas.json)
+Archivo adjunto: [´thunder-collection_ExamenTodocamisetas.json´](thunder-collection_ExamenTodocamisetas.json)
 
 ## 7. Entrega Final
 
