@@ -1,22 +1,9 @@
-# 🧾 Informe Técnico -- Evaluación Transversal Final  
-
-**Asignatura:** Desarrollo Backend  
-
-**Proyecto:** TodoCamisetas API  
-
-**Equipo:** [Nombre del equipo o integrante principal]  
-
-**Fecha:** [dd-mm-aaaa]
-
----
-
-## ✅ 1. Introducción
+## 1. Introducción
 
 El presente documento describe el desarrollo de una API RESTful implementada en PHP puro, con conexión a base de datos MySQL mediante PDO, orientada a la gestión de camisetas, clientes y tallas para una tienda mayorista. La solución fue desarrollada utilizando XAMPP, Thunder Client y siguiendo principios REST para el diseño de rutas y manejo de recursos.
 
 ---
-
-## 🧱 2. Arquitectura del Proyecto
+## 2. Arquitectura del Proyecto
 
 **Estructura de carpetas del backend:**
 
@@ -71,8 +58,7 @@ El presente documento describe el desarrollo de una API RESTful implementada en 
 - `index.php`: punto de entrada único de la API.
 
 ---
-
-## 🗃️ 3. Base de Datos y Relaciones
+## 3. Base de Datos y Relaciones
 
 - Motor: **MySQL**
 
@@ -86,12 +72,12 @@ El presente documento describe el desarrollo de una API RESTful implementada en 
 
   - Camiseta ⬄ Talla: relación muchos a muchos
 
-🔗 **Diagrama Entidad-Relación:** (adjunto como imagen o PDF)
+ **Diagrama Entidad-Relación:** 
 
 ![Diagrama de Base de Datos](./assets/Diagrama_ER.png "Diagrama de Todo Camisetas")
 ---
 
-## 🌐 4. Endpoints RESTful
+ ## 4. Endpoints RESTful
 
 La API fue desarrollada bajo principios REST, utilizando el ID como parámetro en la URL para identificar recursos.
 
@@ -99,7 +85,19 @@ La API fue desarrollada bajo principios REST, utilizando el ID como parámetro e
 
 📝 Documentación completa:  
 
-[Ver tabla de endpoints completa aquí](-endpoints-restful--todocamisetas-api)
+[Ver tabla de endpoints completa aquí](-docs/endpoints.md)
+
+##  Documentación OpenAPI (Swagger)
+
+La documentación completa de los endpoints, parámetros, request/response y códigos de estado fue generada utilizando el estándar OpenAPI 3.0 y se encuentra disponible en el siguiente archivo:
+
+📄 [`swagger.yaml`](swagger.yaml)
+
+Se puede visualizar utilizando herramientas como [Swagger Editor](https://editor.swagger.io/) o Swagger UI.
+
+Opcionalmente, puede ser convertido a HTML o documentado con Swagger Viewer en VSCode.
+
+
 
 ---
 
