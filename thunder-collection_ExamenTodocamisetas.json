@@ -1,0 +1,257 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "ExamenTodocamisetas",
+    "collectionId": "fdd16f0c-5696-4a31-ac33-3801c6fd43b2",
+    "dateExported": "2025-06-11T20:14:39.408Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "8e52efc3-2b66-431d-a5e6-03f9576b42ca",
+            "name": "Camisetas",
+            "containerId": "",
+            "created": "2025-06-11T19:45:15.094Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "c2de7f27-8a17-4362-b41d-6fcc5cc3f5fe",
+            "name": "Clientes",
+            "containerId": "",
+            "created": "2025-06-11T19:45:25.110Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "3e934684-a6b7-4aeb-83ef-7940f8442659",
+            "name": "Tallas",
+            "containerId": "",
+            "created": "2025-06-11T19:45:36.647Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "68f8e4b5-c310-4944-ac81-9774021ecaab",
+            "name": "Asignacion Tallas",
+            "containerId": "",
+            "created": "2025-06-11T19:45:50.794Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "d6cac6e3-794f-4b88-b3e6-5cabd0e0028f",
+            "name": "PrecioFinal",
+            "containerId": "",
+            "created": "2025-06-11T19:46:10.705Z",
+            "sortNum": 50000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "3a77dee0-1a5e-43f8-84f6-1e4334cdce31",
+            "colId": "fdd16f0c-5696-4a31-ac33-3801c6fd43b2",
+            "containerId": "8e52efc3-2b66-431d-a5e6-03f9576b42ca",
+            "name": "Obtenercamisetas",
+            "url": "http://localhost/todoCamisetas-api/camisetas",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2025-06-11T19:46:40.434Z",
+            "modified": "2025-06-11T19:46:44.887Z",
+            "headers": []
+        },
+        {
+            "_id": "0158a4ed-9a45-4e45-8643-5e0125922345",
+            "colId": "fdd16f0c-5696-4a31-ac33-3801c6fd43b2",
+            "containerId": "8e52efc3-2b66-431d-a5e6-03f9576b42ca",
+            "name": "agregarcamiseta",
+            "url": "http://localhost/todoCamisetas-api/camisetas",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2025-06-11T19:50:10.156Z",
+            "modified": "2025-06-11T19:50:36.552Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"titulo\": \"Camiseta Alternativa 2025 – Inter\",\r\n  \"club\": \"Inter de Milán\",\r\n  \"pais\": \"Italia\",\r\n  \"tipo\": \"3era Camiseta\",\r\n  \"color\": \"Negro y Azul\",\r\n  \"precio\": 46000,\r\n  \"precio_oferta\": 42000,\r\n  \"detalles\": \"Edición Europa League\",\r\n  \"codigo_producto\": \"INT2025T\"\r\n}\r\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "b71f1a36-4f6a-45bc-bc57-71bcfe6c7059",
+            "colId": "fdd16f0c-5696-4a31-ac33-3801c6fd43b2",
+            "containerId": "8e52efc3-2b66-431d-a5e6-03f9576b42ca",
+            "name": "Actualizarcamiseta",
+            "url": "http://localhost/todoCamisetas-api/camisetas/1",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2025-06-11T19:52:16.947Z",
+            "modified": "2025-06-11T19:56:06.477Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"titulo\": \"Camiseta Local 2025 – Chile (Actualizada)\",\r\n  \"club\": \"Selección Chilena\",\r\n  \"pais\": \"Chile\",\r\n  \"tipo\": \"Local\",\r\n  \"color\": \"Rojo Intenso\",\r\n  \"precio\": 45500,\r\n  \"precio_oferta\": 40500,\r\n  \"detalles\": \"Actualización 2025\",\r\n  \"codigo_producto\": \"SCL2025L2\"\r\n}\r\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "e0203c5e-df4a-41ae-9ef3-742c6b011063",
+            "colId": "fdd16f0c-5696-4a31-ac33-3801c6fd43b2",
+            "containerId": "8e52efc3-2b66-431d-a5e6-03f9576b42ca",
+            "name": "Eliminarcamisetaporid",
+            "url": "http://localhost/todoCamisetas-api/camisetas/3",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2025-06-11T19:56:43.856Z",
+            "modified": "2025-06-11T19:56:57.170Z",
+            "headers": []
+        },
+        {
+            "_id": "e87511f4-fabb-44c3-8249-ad8835ce88d9",
+            "colId": "fdd16f0c-5696-4a31-ac33-3801c6fd43b2",
+            "containerId": "c2de7f27-8a17-4362-b41d-6fcc5cc3f5fe",
+            "name": "ObtenerClientes",
+            "url": "http://localhost/todoCamisetas-api/clientes",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2025-06-11T19:58:19.914Z",
+            "modified": "2025-06-11T19:58:31.222Z",
+            "headers": []
+        },
+        {
+            "_id": "b7845438-c9b2-433a-972e-fad6ce671711",
+            "colId": "fdd16f0c-5696-4a31-ac33-3801c6fd43b2",
+            "containerId": "c2de7f27-8a17-4362-b41d-6fcc5cc3f5fe",
+            "name": "ObtenerClientesporid",
+            "url": "http://localhost/todoCamisetas-api/clientes/1",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2025-06-11T19:58:46.260Z",
+            "modified": "2025-06-11T19:58:49.463Z",
+            "headers": []
+        },
+        {
+            "_id": "3b2dc4e2-984e-4c27-a208-2e8fee09773e",
+            "colId": "fdd16f0c-5696-4a31-ac33-3801c6fd43b2",
+            "containerId": "c2de7f27-8a17-4362-b41d-6fcc5cc3f5fe",
+            "name": "AgregarClientes",
+            "url": "http://localhost/todoCamisetas-api/clientes",
+            "method": "POST",
+            "sortNum": 100000,
+            "created": "2025-06-11T19:59:11.133Z",
+            "modified": "2025-06-11T19:59:31.337Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"nombre_comercial\": \"FutbolPro\",\r\n  \"rut\": \"78.765.432-1\",\r\n  \"direccion\": \"Viña del Mar, Valparaíso\",\r\n  \"categoria\": \"Preferencial\",\r\n  \"contacto_nombre\": \"Luis Soto\",\r\n  \"contacto_correo\": \"luis@futbolpro.cl\",\r\n  \"porcentaje_descuento\": 15.0\r\n}\r\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "49b12c99-9fe9-4614-a1f2-36baedb7b58b",
+            "colId": "fdd16f0c-5696-4a31-ac33-3801c6fd43b2",
+            "containerId": "c2de7f27-8a17-4362-b41d-6fcc5cc3f5fe",
+            "name": "ActualizarCliente",
+            "url": "http://localhost/todoCamisetas-api/clientes/1",
+            "method": "PUT",
+            "sortNum": 110000,
+            "created": "2025-06-11T19:59:54.869Z",
+            "modified": "2025-06-11T20:00:35.113Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"nombre_comercial\": \"90minutos Actualizado\",\r\n  \"rut\": \"76.123.456-7\",\r\n  \"direccion\": \"Providencia, Santiago\",\r\n  \"categoria\": \"Preferencial\",\r\n  \"contacto_nombre\": \"Carlos Pérez\",\r\n  \"contacto_correo\": \"cperez@90minactual.cl\",\r\n  \"porcentaje_descuento\": 12.5\r\n}\r\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "cd8362aa-aefe-401a-b9bc-f4a522b7cc3f",
+            "colId": "fdd16f0c-5696-4a31-ac33-3801c6fd43b2",
+            "containerId": "c2de7f27-8a17-4362-b41d-6fcc5cc3f5fe",
+            "name": "EliminarCliente",
+            "url": "http://localhost/todoCamisetas-api/clientes/3",
+            "method": "DELETE",
+            "sortNum": 120000,
+            "created": "2025-06-11T20:01:36.180Z",
+            "modified": "2025-06-11T20:01:48.713Z",
+            "headers": []
+        },
+        {
+            "_id": "0374511d-bd3c-455e-9f6c-4d4cb3d43c74",
+            "colId": "fdd16f0c-5696-4a31-ac33-3801c6fd43b2",
+            "containerId": "3e934684-a6b7-4aeb-83ef-7940f8442659",
+            "name": "ObtenerTallas",
+            "url": "http://localhost/todoCamisetas-api/tallas",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2025-06-11T20:03:21.032Z",
+            "modified": "2025-06-11T20:03:31.024Z",
+            "headers": []
+        },
+        {
+            "_id": "d14f12d4-6b43-4a70-b3ed-152e7ea1f72e",
+            "colId": "fdd16f0c-5696-4a31-ac33-3801c6fd43b2",
+            "containerId": "3e934684-a6b7-4aeb-83ef-7940f8442659",
+            "name": "AgregarTallas",
+            "url": "http://localhost/todoCamisetas-api/tallas",
+            "method": "POST",
+            "sortNum": 150000,
+            "created": "2025-06-11T20:03:51.097Z",
+            "modified": "2025-06-11T20:04:04.726Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"nombre\": \"XXL\"\r\n}\r\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "7c164215-08ea-43f4-8c13-d55cd0c72bf6",
+            "colId": "fdd16f0c-5696-4a31-ac33-3801c6fd43b2",
+            "containerId": "3e934684-a6b7-4aeb-83ef-7940f8442659",
+            "name": "EliminarTalla",
+            "url": "http://localhost/todoCamisetas-api/tallas/5",
+            "method": "DELETE",
+            "sortNum": 170000,
+            "created": "2025-06-11T20:04:39.484Z",
+            "modified": "2025-06-11T20:04:57.880Z",
+            "headers": []
+        },
+        {
+            "_id": "32f8abfd-e377-479a-bc3e-1e8094e6e541",
+            "colId": "fdd16f0c-5696-4a31-ac33-3801c6fd43b2",
+            "containerId": "68f8e4b5-c310-4944-ac81-9774021ecaab",
+            "name": "CrearAsignaciontalla",
+            "url": "http://localhost/todoCamisetas-api/tallas/asignar",
+            "method": "POST",
+            "sortNum": 180000,
+            "created": "2025-06-11T20:05:27.688Z",
+            "modified": "2025-06-11T20:08:06.830Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"camiseta_id\": 2,\r\n  \"talla_id\": 1\r\n}\r\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "7d279a0f-49d2-42bd-9d0e-7b0f92041f0e",
+            "colId": "fdd16f0c-5696-4a31-ac33-3801c6fd43b2",
+            "containerId": "68f8e4b5-c310-4944-ac81-9774021ecaab",
+            "name": "Obtenerasignacion",
+            "url": "http://localhost/todoCamisetas-api/tallas/camiseta/2",
+            "method": "GET",
+            "sortNum": 190000,
+            "created": "2025-06-11T20:07:35.167Z",
+            "modified": "2025-06-11T20:07:54.128Z",
+            "headers": []
+        },
+        {
+            "_id": "ef7a6225-245d-442a-9ad6-23fcd43d432c",
+            "colId": "fdd16f0c-5696-4a31-ac33-3801c6fd43b2",
+            "containerId": "d6cac6e3-794f-4b88-b3e6-5cabd0e0028f",
+            "name": "ObtenerPreciofinal",
+            "url": "http://localhost/todoCamisetas-api/camisetas/1/cliente/1",
+            "method": "GET",
+            "sortNum": 280000,
+            "created": "2025-06-11T20:13:37.793Z",
+            "modified": "2025-06-11T20:14:22.778Z",
+            "headers": []
+        }
+    ],
+    "ref": "NdZmQsq2YFL2rPZpIBrj4aEIn6lasKLM7c1gbagLZakPZV0-UtPIbt7ZsKYVVLY7XoCFJFSxSzw2sjqUWCP_rA"
+}

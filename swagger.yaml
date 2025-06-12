@@ -1,0 +1,1087 @@
+openapi: 3.0.3
+info:
+  title: API de Camisetas
+  description: API para gestionar camisetas y calcular el precio final según cliente
+  version: 1.0.0
+  contact:
+    name: Tu Nombre
+    email: tu.email@example.com
+    url: http://tu-sitio-web.com
+
+servers:
+  - url: http://localhost:8000
+
+tags:
+  - name: Camisetas
+    description: Operaciones relacionadas con las camisetas
+  - name: Precios
+    description: Cálculo de precios finales
+  - name: Clientes
+    description: Operaciones relacionadas con los clientes
+  - name: Tallas
+    description: Operaciones relacionadas con las tallas de camisetas
+
+paths:
+  /camisetas:
+    get:
+      summary: Obtener todas las camisetas
+      description: Recupera una lista de todas las camisetas disponibles en el sistema.
+      operationId: getAllCamisetas
+      tags:
+        - Camisetas
+      responses:
+        '200':
+          description: Lista de camisetas obtenida exitosamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Camiseta'
+              examples:
+                success:
+                  value:
+                    - id: 1
+                      titulo: "Camiseta Real Madrid"
+                      club: "Real Madrid"
+                      pais: "España"
+                      tipo: "Local"
+                      color: "Blanco"
+                      precio: 85.00
+                      precio_oferta: null
+                      detalles: "Temporada 2024-2025"
+                      codigo_producto: "RM2025-L"
+                    - id: 2
+                      titulo: "Camiseta FC Barcelona"
+                      club: "FC Barcelona"
+                      pais: "España"
+                      tipo: "Visitante"
+                      color: "Rojo"
+                      precio: 80.00
+                      precio_oferta: 70.00
+                      detalles: "Temporada 2024-2025"
+                      codigo_producto: "FCB2025-V"
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Error al obtener las camisetas."
+
+    post:
+      summary: Crear una nueva camiseta
+      description: Añade una nueva camiseta al inventario.
+      operationId: createCamiseta
+      tags:
+        - Camisetas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CamisetaInput'
+            example:
+              titulo: "Camiseta Argentina"
+              club: "Selección Argentina"
+              pais: "Argentina"
+              tipo: "Local"
+              color: "Celeste y Blanco"
+              precio: 90.00
+              detalles: "Campeón Mundial 2022"
+              codigo_producto: "ARG2022-L"
+      responses:
+        '201':
+          description: Camiseta creada con éxito.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: "Camiseta creada con éxito"
+        '400':
+          description: Datos de entrada inválidos o campos requeridos faltantes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Campo requerido: titulo"
+        '500':
+          description: Error interno del servidor al crear la camiseta.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Error al crear camiseta"
+
+  /camisetas/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID de la camiseta.
+        schema:
+          type: integer
+          format: int64
+          example: 123
+    get:
+      summary: Obtener una camiseta por ID
+      description: Recupera los detalles de una camiseta específica por su ID.
+      operationId: getCamisetaById
+      tags:
+        - Camisetas
+      responses:
+        '200':
+          description: Detalles de la camiseta obtenidos exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Camiseta'
+              example:
+                id: 1
+                titulo: "Camiseta Real Madrid"
+                club: "Real Madrid"
+                pais: "España"
+                tipo: "Local"
+                color: "Blanco"
+                precio: 85.00
+                precio_oferta: null
+                detalles: "Temporada 2024-2025"
+                codigo_producto: "RM2025-L"
+        '404':
+          description: Camiseta no encontrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Camiseta no encontrada"
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Error al obtener la camiseta."
+
+    put:
+      summary: Actualizar camiseta por ID
+      description: Actualiza los datos de una camiseta existente por su ID.
+      operationId: updateCamisetaById
+      tags:
+        - Camisetas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CamisetaInput'
+            example:
+              titulo: "Camiseta Argentina"
+              club: "Selección Argentina"
+              pais: "Argentina"
+              tipo: "Local"
+              color: "Celeste y Blanco"
+              precio: 95.00
+              detalles: "Campeón Mundial 2022 - Edición Especial"
+              codigo_producto: "ARG2022-L"
+              precio_oferta: 80.00
+      responses:
+        '200':
+          description: Camiseta actualizada con éxito.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: "Camiseta actualizada con éxito"
+        '404':
+          description: Camiseta no encontrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Camiseta no encontrada"
+        '500':
+          description: Error interno del servidor al actualizar el camiseta.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Error al actualizar camiseta"
+
+    delete:
+      summary: Eliminar camiseta por ID
+      description: Elimina una camiseta del inventario por su ID.
+      operationId: deleteCamisetaById
+      tags:
+        - Camisetas
+      responses:
+        '200':
+          description: Camiseta eliminada con éxito.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: "Camiseta eliminada con éxito"
+        '404':
+          description: Camiseta no encontrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Camiseta no encontrada"
+        '500':
+          description: Error interno del servidor al eliminar la camiseta.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Error al eliminar camiseta"
+
+  /camisetas/{camisetaId}/cliente/{clienteId}:
+    get:
+      summary: Obtener el precio final de una camiseta para un cliente
+      description: Calcula el precio final de una camiseta aplicando posibles descuentos según la categoría del cliente.
+      operationId: getPrecioFinalCamiseta
+      tags:
+        - Precios
+        - Camisetas
+      parameters:
+        - name: camisetaId
+          in: path
+          required: true
+          description: ID de la camiseta para la cual se calculará el precio final.
+          schema:
+            type: integer
+            format: int64
+            example: 1
+        - name: clienteId
+          in: path
+          required: true
+          description: ID del cliente al que se aplicarán los descuentos (si aplica).
+          schema:
+            type: integer
+            format: int64
+            example: 10
+      responses:
+        '200':
+          description: Precio final de la camiseta calculado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  titulo:
+                    type: string
+                    description: Título de la camiseta.
+                  cliente_categoria:
+                    type: string
+                    description: Categoría del cliente (ej. 'Premium', 'Normal').
+                  precio_base:
+                    type: number
+                    format: float
+                    description: Precio original de la camiseta sin descuentos.
+                  precio_final:
+                    type: number
+                    format: float
+                    description: Precio final de la camiseta después de aplicar descuentos.
+              example:
+                titulo: "Camiseta Real Madrid"
+                cliente_categoria: "Premium"
+                precio_base: 85.00
+                precio_final: 68.00
+        '404':
+          description: Camiseta o cliente no encontrados.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Camiseta o cliente no encontrados"
+        '500':
+          description: Error interno del servidor al calcular el precio.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Error interno al procesar la solicitud."
+
+  /clientes:
+    get:
+      summary: Obtener todos los clientes
+      description: Recupera una lista de todos los clientes registrados en el sistema.
+      operationId: getAllClientes
+      tags:
+        - Clientes
+      responses:
+        '200':
+          description: Lista de clientes obtenida exitosamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cliente'
+              examples:
+                success:
+                  value:
+                    - id: 1
+                      nombre_comercial: "Empresa A"
+                      rut: "12345678-9"
+                      direccion: "Calle Falsa 123"
+                      categoria: "Regular"
+                      contacto_nombre: "Juan Perez"
+                      contacto_correo: "juan.perez@empresa.com"
+                      porcentaje_descuento: 0.05
+                    - id: 2
+                      nombre_comercial: "Comercial B"
+                      rut: "98765432-1"
+                      direccion: "Avenida Siempre Viva 742"
+                      categoria: "Preferencial"
+                      contacto_nombre: "Maria Garcia"
+                      contacto_correo: "maria.garcia@comercialb.cl"
+                      porcentaje_descuento: 0.10
+        '500':
+          description: Error interno del servidor al obtener los clientes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Error al obtener los clientes."
+
+    post:
+      summary: Crear un nuevo cliente
+      description: Añade un nuevo cliente al sistema.
+      operationId: createCliente
+      tags:
+        - Clientes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClienteInput'
+            example:
+              nombre_comercial: "Negocio C"
+              rut: "11223344-5"
+              direccion: "Pasaje Los Abedules 5"
+              categoria: "Regular"
+              contacto_nombre: "Pedro Gomez"
+              contacto_correo: "pedro.gomez@negocioc.cl"
+              porcentaje_descuento: 0.03
+      responses:
+        '201':
+          description: Cliente creado correctamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: "Cliente creado correctamente"
+        '400':
+          description: Datos de entrada inválidos o campos requeridos faltantes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                missingField:
+                  value:
+                    error: "Campo requerido: rut"
+                invalidCategory:
+                  value:
+                    error: "Categoría inválida. Solo se permite Regular o Preferencial."
+        '500':
+          description: Error interno del servidor al crear el cliente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Error al crear cliente"
+
+  /clientes/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID del cliente.
+        schema:
+          type: integer
+          format: int64
+          example: 1
+    get:
+      summary: Obtener un cliente por ID
+      description: Recupera los detalles de un cliente específico por su ID.
+      operationId: getClienteById
+      tags:
+        - Clientes
+      responses:
+        '200':
+          description: Detalles del cliente obtenidos exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+              example:
+                id: 1
+                nombre_comercial: "Empresa A"
+                rut: "12345678-9"
+                direccion: "Calle Falsa 123"
+                categoria: "Regular"
+                contacto_nombre: "Juan Perez"
+                contacto_correo: "juan.perez@empresa.com"
+                porcentaje_descuento: 0.05
+        '404':
+          description: Cliente no encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Cliente no encontrado"
+        '500':
+          description: Error interno del servidor al obtener el cliente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Error al obtener el cliente."
+
+    put:
+      summary: Actualizar cliente por ID
+      description: Actualiza los datos de un cliente existente por su ID.
+      operationId: updateClienteById
+      tags:
+        - Clientes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClienteInput'
+            example:
+              nombre_comercial: "Negocio C S.A."
+              rut: "11223344-5"
+              direccion: "Pasaje Los Abedules 5, Oficina 101"
+              categoria: "Preferencial"
+              contacto_nombre: "Pedro Gomez"
+              contacto_correo: "pedro.gomez@negocioc.cl"
+              porcentaje_descuento: 0.15
+      responses:
+        '200':
+          description: Cliente actualizado correctamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: "Cliente actualizado correctamente"
+        '404':
+          description: Cliente no encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Cliente no encontrado"
+        '500':
+          description: Error interno del servidor al actualizar el cliente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Error al actualizar cliente"
+
+    delete:
+      summary: Eliminar cliente por ID
+      description: Elimina un cliente del sistema por su ID.
+      operationId: deleteClienteById
+      tags:
+        - Clientes
+      responses:
+        '200':
+          description: Cliente eliminado con éxito.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: "Cliente eliminado con éxito"
+        '404':
+          description: Cliente no encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Cliente no encontrado"
+        '500':
+          description: Error interno del servidor al eliminar el cliente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Error al eliminar cliente"
+
+  /tallas:
+    get:
+      summary: Obtener todas las tallas
+      description: Recupera una lista de todas las tallas de camisetas disponibles.
+      operationId: getAllTallas
+      tags:
+        - Tallas
+      responses:
+        '200':
+          description: Lista de tallas obtenida exitosamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Talla'
+              examples:
+                success:
+                  value:
+                    - id: 1
+                      nombre: "S"
+                    - id: 2
+                      nombre: "M"
+                    - id: 3
+                      nombre: "L"
+                    - id: 4
+                      nombre: "XL"
+        '500':
+          description: Error interno del servidor al obtener las tallas.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Error al obtener tallas"
+
+    post:
+      summary: Crear una nueva talla
+      description: Añade una nueva talla de camiseta al sistema.
+      operationId: createTalla
+      tags:
+        - Tallas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TallaInput'
+            example:
+              nombre: "XXL"
+      responses:
+        '201':
+          description: Talla creada con éxito.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: "Talla creada"
+        '400':
+          description: Datos de entrada inválidos (ej. nombre de talla requerido).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Nombre de talla requerido"
+        '500':
+          description: Error interno del servidor al crear la talla.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Error al crear talla"
+
+  /tallas/{id}:
+    delete:
+      summary: Eliminar talla por ID
+      description: Elimina una talla del sistema por su ID.
+      operationId: deleteTallaById
+      tags:
+        - Tallas
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la talla a eliminar.
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      responses:
+        '200':
+          description: Talla eliminada con éxito.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: "Talla eliminada"
+        '404':
+          description: Talla no encontrada.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Talla no encontrada"
+        '500':
+          description: Error interno del servidor al eliminar la talla.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Error al eliminar talla"
+
+  /tallas/asignar:
+    post:
+      summary: Asignar una talla a una camiseta
+      description: Asigna una talla específica a una camiseta existente.
+      operationId: assignTallaToCamiseta
+      tags:
+        - Tallas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AsignarTallaInput'
+            example:
+              camiseta_id: 1
+              talla_id: 2
+      responses:
+        '200':
+          description: Talla asignada a camiseta con éxito.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: "Talla asignada a camiseta"
+        '400':
+          description: Datos de entrada inválidos (ej. IDs requeridos).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "camiseta_id y talla_id requeridos"
+        '404':
+          description: Camiseta o talla no existen.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                camisetaNotFound:
+                  value:
+                    error: "Camiseta no existe"
+                tallaNotFound:
+                  value:
+                    error: "Talla no existe"
+        '500':
+          description: Error interno del servidor al asignar la talla.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Error al asignar talla"
+
+  /tallas/camiseta/{id}:
+    get:
+      summary: Obtener tallas por ID de camiseta
+      description: Recupera todas las tallas asociadas a una camiseta específica por su ID.
+      operationId: getTallasByCamisetaId
+      tags:
+        - Tallas
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la camiseta para la cual se obtendrán las tallas.
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      responses:
+        '200':
+          description: Tallas de la camiseta obtenidas exitosamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Talla'
+              examples:
+                success:
+                  value:
+                    - id: 1
+                      nombre: "S"
+                    - id: 2
+                      nombre: "M"
+        '404':
+          description: Camiseta no encontrada o sin tallas asignadas.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+              example: []
+        '500':
+          description: Error interno del servidor al obtener las tallas por camiseta.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: "Error al obtener tallas por camiseta"
+
+components:
+  schemas:
+    Camiseta:
+      type: object
+      description: Representa una camiseta en el sistema.
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: ID único de la camiseta.
+          readOnly: true
+          example: 1
+        titulo:
+          type: string
+          description: Título o nombre de la camiseta.
+          example: "Camiseta Real Madrid"
+        club:
+          type: string
+          description: Club de fútbol asociado a la camiseta.
+          example: "Real Madrid"
+        pais:
+          type: string
+          description: País de origen o del club.
+          example: "España"
+        tipo:
+          type: string
+          description: Tipo de camiseta (ej. 'Local', 'Visitante', 'Entrenamiento').
+          example: "Local"
+        color:
+          type: string
+          description: Color principal de la camiseta.
+          example: "Blanco"
+        precio:
+          type: number
+          format: float
+          description: Precio base de la camiseta.
+          example: 85.00
+        precio_oferta:
+          type: number
+          format: float
+          nullable: true
+          description: Precio con oferta, si aplica. Puede ser nulo.
+          example: 70.00
+        detalles:
+          type: string
+          description: Detalles adicionales o descripción de la camiseta.
+          example: "Temporada 2024-2025, Versión Jugador"
+        codigo_producto:
+          type: string
+          description: Código único del producto.
+          example: "RM2025-L"
+      example:
+        id: 1
+        titulo: "Camiseta Real Madrid"
+        club: "Real Madrid"
+        pais: "España"
+        tipo: "Local"
+        color: "Blanco"
+        precio: 85.00
+        precio_oferta: null
+        detalles: "Temporada 2024-2025"
+        codigo_producto: "RM2025-L"
+
+    CamisetaInput:
+      type: object
+      description: Datos necesarios para crear o actualizar una camiseta.
+      required:
+        - titulo
+        - club
+        - pais
+        - tipo
+        - color
+        - precio
+        - detalles
+        - codigo_producto
+      properties:
+        titulo:
+          type: string
+          description: Título o nombre de la camiseta.
+          example: "Camiseta Argentina"
+        club:
+          type: string
+          description: Club de fútbol asociado a la camiseta.
+          example: "Selección Argentina"
+        pais:
+          type: string
+          description: País de origen o del club.
+          example: "Argentina"
+        tipo:
+          type: string
+          description: Tipo de camiseta (ej. 'Local', 'Visitante', 'Entrenamiento').
+          example: "Local"
+        color:
+          type: string
+          description: Color principal de la camiseta.
+          example: "Celeste y Blanco"
+        precio:
+          type: number
+          format: float
+          description: Precio base de la camiseta.
+          example: 90.00
+        precio_oferta:
+          type: number
+          format: float
+          nullable: true
+          description: Precio con oferta, si aplica. Puede ser nulo.
+          example: null
+        detalles:
+          type: string
+          description: Detalles adicionales o descripción de la camiseta.
+          example: "Campeón Mundial 2022"
+        codigo_producto:
+          type: string
+          description: Código único del producto.
+          example: "ARG2022-L"
+      example:
+        titulo: "Camiseta Argentina"
+        club: "Selección Argentina"
+        pais: "Argentina"
+        tipo: "Local"
+        color: "Celeste y Blanco"
+        precio: 90.00
+        detalles: "Campeón Mundial 2022"
+        codigo_producto: "ARG2022-L"
+
+    Cliente:
+      type: object
+      description: Representa un cliente en el sistema.
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: ID único del cliente.
+          readOnly: true
+          example: 1
+        nombre_comercial:
+          type: string
+          description: Nombre comercial del cliente.
+          example: "Empresa A"
+        rut:
+          type: string
+          description: Rol Único Tributario (RUT) del cliente.
+          example: "12345678-9"
+        direccion:
+          type: string
+          description: Dirección física del cliente.
+          example: "Calle Falsa 123"
+        categoria:
+          type: string
+          description: Categoría del cliente (Regular o Preferencial).
+          enum:
+            - Regular
+            - Preferencial
+          example: "Regular"
+        contacto_nombre:
+          type: string
+          description: Nombre de la persona de contacto en el cliente.
+          example: "Juan Perez"
+        contacto_correo:
+          type: string
+          format: email
+          description: Correo electrónico de contacto del cliente.
+          example: "juan.perez@empresa.com"
+        porcentaje_descuento:
+          type: number
+          format: float
+          description: Porcentaje de descuento aplicado a este cliente.
+          minimum: 0
+          maximum: 1
+          example: 0.05
+      example:
+        id: 1
+        nombre_comercial: "Empresa A"
+        rut: "12345678-9"
+        direccion: "Calle Falsa 123"
+        categoria: "Regular"
+        contacto_nombre: "Juan Perez"
+        contacto_correo: "juan.perez@empresa.com"
+        porcentaje_descuento: 0.05
+
+    ClienteInput:
+      type: object
+      description: Datos necesarios para crear o actualizar un cliente.
+      required:
+        - nombre_comercial
+        - rut
+        - direccion
+        - categoria
+        - contacto_nombre
+        - contacto_correo
+        - porcentaje_descuento
+      properties:
+        nombre_comercial:
+          type: string
+          description: Nombre comercial del cliente.
+          example: "Negocio C"
+        rut:
+          type: string
+          description: Rol Único Tributario (RUT) del cliente.
+          example: "11223344-5"
+        direccion:
+          type: string
+          description: Dirección física del cliente.
+          example: "Pasaje Los Abedules 5"
+        categoria:
+          type: string
+          description: Categoría del cliente (Regular o Preferencial).
+          enum:
+            - Regular
+            - Preferencial
+          example: "Regular"
+        contacto_nombre:
+          type: string
+          description: Nombre de la persona de contacto en el cliente.
+          example: "Pedro Gomez"
+        contacto_correo:
+          type: string
+          format: email
+          description: Correo electrónico de contacto del cliente.
+          example: "pedro.gomez@negocioc.cl"
+        porcentaje_descuento:
+          type: number
+          format: float
+          description: Porcentaje de descuento aplicado a este cliente.
+          minimum: 0
+          maximum: 1
+          example: 0.03
+      example:
+        nombre_comercial: "Negocio C"
+        rut: "11223344-5"
+        direccion: "Pasaje Los Abedules 5"
+        categoria: "Regular"
+        contacto_nombre: "Pedro Gomez"
+        contacto_correo: "pedro.gomez@negocioc.cl"
+        porcentaje_descuento: 0.03
+
+    Talla:
+      type: object
+      description: Representa una talla de camiseta.
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: ID único de la talla.
+          readOnly: true
+          example: 1
+        nombre:
+          type: string
+          description: Nombre de la talla (ej. S, M, L, XL).
+          example: "M"
+      example:
+        id: 2
+        nombre: "L"
+
+    TallaInput:
+      type: object
+      description: Datos necesarios para crear una nueva talla.
+      required:
+        - nombre
+      properties:
+        nombre:
+          type: string
+          description: Nombre de la talla a crear.
+          example: "XXL"
+      example:
+        nombre: "S"
+
+    AsignarTallaInput:
+      type: object
+      description: Datos para asignar una talla a una camiseta.
+      required:
+        - camiseta_id
+        - talla_id
+      properties:
+        camiseta_id:
+          type: integer
+          format: int64
+          description: ID de la camiseta.
+          example: 1
+        talla_id:
+          type: integer
+          format: int64
+          description: ID de la talla a asignar.
+          example: 2
+      example:
+        camiseta_id: 1
+        talla_id: 2
+
+    ErrorResponse:
+      type: object
+      description: Estructura genérica para respuestas de error.
+      properties:
+        error:
+          type: string
+          description: Mensaje de error.
+          example: "Cliente no encontrado"
