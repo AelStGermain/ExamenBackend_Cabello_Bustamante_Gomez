@@ -3,8 +3,13 @@ require_once __DIR__ . '/../controllers/CamisetaController.php';
 require_once __DIR__ . '/../controllers/ClienteController.php';
 require_once __DIR__ . '/../controllers/TallaController.php';
 
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $method = $_SERVER['REQUEST_METHOD'];
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+// Detecta automáticamente la carpeta (como /todoCamisetas-api)
+$basePath = dirname($_SERVER['SCRIPT_NAME']);
+$uri = str_replace($basePath, '', $uri);
+
 
 // Rutas CAMISETAS
 if ($method === 'GET' && preg_match('/^\/camisetas$/', $uri)) {
